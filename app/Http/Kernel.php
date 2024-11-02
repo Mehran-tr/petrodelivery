@@ -22,6 +22,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\ReferrerPolicyMiddleware::class,
+        \App\Http\Middleware\CheckTokenExpiration::class,
     ];
 
     /**
@@ -82,5 +83,6 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\CheckAdmin::class,
         'company.access' => \App\Http\Middleware\CheckCompanyAccess::class,
         'custom_cors' => \App\Http\Middleware\CustomCorsMiddleware::class,
+        'check.token.expiration' => \App\Http\Middleware\CheckTokenExpiration::class,
     ];
 }

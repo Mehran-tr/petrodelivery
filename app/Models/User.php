@@ -65,4 +65,9 @@ class User extends Authenticatable
     public function isUser() {
         return $this->role === self::ROLE_USER;
     }
+
+    public function refreshTokens()
+    {
+        return $this->hasMany(RefreshToken::class);
+    }
 }

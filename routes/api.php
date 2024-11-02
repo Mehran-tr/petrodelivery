@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Authenticated routes (assuming you’re using Sanctum or other authentication)
-Route::middleware(['auth:sanctum','ref_cors','custom_cors'])->group(function () {
+Route::middleware(['auth:sanctum','ref_cors','custom_cors', 'check.token.expiration'])->group(function () {
     require_once __DIR__.'/company.php';
     require_once __DIR__.'/user.php';
     require_once __DIR__.'/client.php';

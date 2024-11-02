@@ -233,5 +233,24 @@ The frontend uses **Jest** and **React Testing Library**.
 - **Environment Variables**: Both the backend and frontend rely on environment variables set in `.env` files.
 
 ---
+### Token Security Issues
+
+Refresh Tokens with Sanctum
+
+To manage token expiration securely, this project implements a refresh token mechanism alongside Laravel Sanctum's access tokens. Access tokens have a short lifespan to enhance security, and when they expire, users can use a refresh token to obtain a new access token without re-authenticating.
+
+The process includes:
+
+    Access Token Expiration: Access tokens are issued with an expiration time.
+    Refresh Tokens: A refresh token, securely hashed and stored, is generated alongside the access token during login. When the access token expires, the refresh token can be used at the /api/refresh endpoint to request a new access token.
+    Token Cleanup: During logout, both access tokens and refresh tokens are deleted to prevent unauthorized access.
+
+This setup enhances security by limiting token lifetimes while allowing a seamless user experience through refresh tokens.
+
+---
+### Security Key Points:
+
+- Also we can use a Strong, Consistent Signing Algorithm and Validate the Algorithm and Signature Consistently
+  (we can use in high scale project)
 
 Feel free to customize and expand this project as needed for your business requirements. Happy coding!
