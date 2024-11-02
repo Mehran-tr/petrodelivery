@@ -12,6 +12,10 @@ class CreateCompaniesTable extends Migration {
             $table->string('domain')->unique(); // used for tenant identification
             $table->timestamps();
         });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
+        });
     }
 
     public function down() {

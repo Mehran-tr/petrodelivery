@@ -21,6 +21,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        \App\Http\Middleware\ReferrerPolicyMiddleware::class,
     ];
 
     /**
@@ -36,6 +37,8 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\ReferrerPolicyMiddleware::class,
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
         ],
 
         'api' => [
@@ -45,6 +48,7 @@ class Kernel extends HttpKernel
             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\ReferrerPolicyMiddleware::class,
         ],
 
     ];
@@ -68,5 +72,15 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'custom_cors' => \App\Http\Middleware\CustomCorsMiddleware::class,
+        'ref_cors' => \App\Http\Middleware\ReferrerPolicyMiddleware::class,
+    ];
+
+    protected $routeMiddleware = [
+        // other middlewares
+        'role' => \App\Http\Middleware\CheckRole::class,
+        'admin' => \App\Http\Middleware\CheckAdmin::class,
+        'company.access' => \App\Http\Middleware\CheckCompanyAccess::class,
+        'custom_cors' => \App\Http\Middleware\CustomCorsMiddleware::class,
     ];
 }

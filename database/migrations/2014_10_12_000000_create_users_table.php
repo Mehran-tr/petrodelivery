@@ -8,14 +8,15 @@ class CreateUsersTable extends Migration {
     public function up() {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->constrained()->onDelete('cascade');
+            $table->foreignId('company_id')->nullable();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->enum('role', ['admin', 'operator', 'driver']);
-            $table->rememberToken();
+            $table->string('role')->default('user');
             $table->timestamps();
         });
+
+
     }
 
     public function down() {

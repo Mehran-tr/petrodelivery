@@ -14,6 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Authenticated routes (assuming you’re using Sanctum or other authentication)
+Route::middleware(['auth:sanctum','ref_cors','custom_cors'])->group(function () {
+    require_once __DIR__.'/company.php';
+    require_once __DIR__.'/user.php';
+    require_once __DIR__.'/client.php';
+    require_once __DIR__.'/order.php';
+    require_once __DIR__.'/delivery_truck.php';
+    require __DIR__ . '/locations.php';
+});
+
+Route::middleware(['custom_cors','ref_cors'])->group(function () {
+
+    require_once __DIR__.'/auth.php';
 });

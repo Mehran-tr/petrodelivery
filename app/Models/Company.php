@@ -4,10 +4,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Multitenancy\Models\Concerns\UsesTenantConnection;
 class Company extends Model {
-    use UsesTenantConnection;
+    use HasFactory;
 
     protected $fillable = ['name', 'domain'];
 
@@ -19,12 +19,12 @@ class Company extends Model {
         return $this->hasMany(Client::class);
     }
 
-    public function orders() {
-        return $this->hasMany(Order::class);
+    public function trucks() {
+        return $this->hasMany(DeliveryTruck::class);
     }
 
-    public function deliveryTrucks() {
-        return $this->hasMany(DeliveryTruck::class);
+    public function orders() {
+        return $this->hasMany(Order::class);
     }
 }
 

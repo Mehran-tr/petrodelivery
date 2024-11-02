@@ -13,6 +13,7 @@ class CreateOrdersTable extends Migration {
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->decimal('fuel_amount', 8, 2);
             $table->string('delivery_address');
+            $table->foreignId('company_id')->constrained()->onDelete('cascade');
             $table->enum('status', ['pending', 'completed', 'canceled']);
             $table->timestamps();
         });
